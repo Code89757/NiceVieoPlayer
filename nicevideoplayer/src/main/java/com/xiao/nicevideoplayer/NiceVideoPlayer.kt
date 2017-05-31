@@ -11,19 +11,21 @@ import android.util.AttributeSet
 import android.view.Gravity
 import android.view.Surface
 import android.view.TextureView
-import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import android.widget.ListView
-import android.widget.Toast
-
 import java.io.IOException
 
 /**
  * Created by XiaoJianjun on 2017/4/28.
  * 播放器
  */
-class NiceVideoPlayer @JvmOverloads constructor(private val mContext: Context, attrs: AttributeSet? = null) : FrameLayout(mContext, attrs), NiceVideoPlayerControl, TextureView.SurfaceTextureListener {
+class NiceVideoPlayer @JvmOverloads constructor(
+        private val mContext: Context,
+        attrs: AttributeSet? = null
+)
+    : FrameLayout(mContext, attrs),
+        NiceVideoPlayerControl,
+        TextureView.SurfaceTextureListener {
 
     private var mCurrentState = STATE_IDLE
     private var mPlayerState = PLAYER_NORMAL
@@ -38,6 +40,48 @@ class NiceVideoPlayer @JvmOverloads constructor(private val mContext: Context, a
     override var bufferPercentage: Int = 0
         private set
 
+    override val isIdle: Boolean
+        get() = mCurrentState == STATE_IDLE
+
+    override val isPreparing: Boolean
+        get() = mCurrentState == STATE_PREPARING
+
+    override val isPrepared: Boolean
+        get() = mCurrentState == STATE_PREPARED
+
+    override val isBufferingPlaying: Boolean
+        get() = mCurrentState == STATE_BUFFERING_PLAYING
+
+    override val isBufferingPaused: Boolean
+        get() = mCurrentState == STATE_BUFFERING_PAUSED
+
+    override val isPlaying: Boolean
+        get() = mCurrentState == STATE_PLAYING
+
+    override val isPaused: Boolean
+        get() = mCurrentState == STATE_PAUSED
+
+    override val isError: Boolean
+        get() = mCurrentState == STATE_ERROR
+
+    override val isCompleted: Boolean
+        get() = mCurrentState == STATE_COMPLETED
+
+    override val isFullScreen: Boolean
+        get() = mPlayerState == PLAYER_FULL_SCREEN
+
+    override val isTinyWindow: Boolean
+        get() = mPlayerState == PLAYER_TINY_WINDOW
+
+    override val isNormal: Boolean
+        get() = mPlayerState == PLAYER_NORMAL
+
+    override val duration: Int
+        get() = if (mMediaPlayer != null) mMediaPlayer!!.duration else 0
+
+    override val currentPosition: Int
+        get() = if (mMediaPlayer != null) mMediaPlayer!!.currentPosition else 0
+
     init {
         init()
     }
@@ -51,7 +95,7 @@ class NiceVideoPlayer @JvmOverloads constructor(private val mContext: Context, a
         this.addView(mContainer, params)
     }
 
-    fun setUp(url: String, headers: Map<String, String>) {
+    fun setUp(url: String, headers: Map<String, String>?) {
         mUrl = url
         mHeaders = headers
     }
@@ -113,48 +157,6 @@ class NiceVideoPlayer @JvmOverloads constructor(private val mContext: Context, a
             mMediaPlayer!!.seekTo(pos)
         }
     }
-
-    override val isIdle: Boolean
-        get() = mCurrentState == STATE_IDLE
-
-    override val isPreparing: Boolean
-        get() = mCurrentState == STATE_PREPARING
-
-    override val isPrepared: Boolean
-        get() = mCurrentState == STATE_PREPARED
-
-    override val isBufferingPlaying: Boolean
-        get() = mCurrentState == STATE_BUFFERING_PLAYING
-
-    override val isBufferingPaused: Boolean
-        get() = mCurrentState == STATE_BUFFERING_PAUSED
-
-    override val isPlaying: Boolean
-        get() = mCurrentState == STATE_PLAYING
-
-    override val isPaused: Boolean
-        get() = mCurrentState == STATE_PAUSED
-
-    override val isError: Boolean
-        get() = mCurrentState == STATE_ERROR
-
-    override val isCompleted: Boolean
-        get() = mCurrentState == STATE_COMPLETED
-
-    override val isFullScreen: Boolean
-        get() = mPlayerState == PLAYER_FULL_SCREEN
-
-    override val isTinyWindow: Boolean
-        get() = mPlayerState == PLAYER_TINY_WINDOW
-
-    override val isNormal: Boolean
-        get() = mPlayerState == PLAYER_NORMAL
-
-    override val duration: Int
-        get() = if (mMediaPlayer != null) mMediaPlayer!!.duration else 0
-
-    override val currentPosition: Int
-        get() = if (mMediaPlayer != null) mMediaPlayer!!.currentPosition else 0
 
     private fun initMediaPlayer() {
         if (mMediaPlayer == null) {

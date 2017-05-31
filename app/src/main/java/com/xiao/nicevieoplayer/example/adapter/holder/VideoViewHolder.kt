@@ -26,9 +26,9 @@ class VideoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     }
 
     fun bindData(video: Video) {
-        mController!!.setTitle(video.title)
-        mController!!.setImage(video.imageUrl)
-        mVideoPlayer.setController(mController)
-        mVideoPlayer.setUp(video.videoUrl, null)
+        mController!!.setTitle(video.title!!)
+        mController!!.setImage(video.imageUrl!!)
+        mVideoPlayer.setController(mController!!)
+        mVideoPlayer.setUp(video.videoUrl!!, null)
     }
 }

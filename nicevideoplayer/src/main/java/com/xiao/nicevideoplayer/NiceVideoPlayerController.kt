@@ -5,17 +5,9 @@ import android.os.CountDownTimer
 import android.support.annotation.DrawableRes
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.SeekBar
-import android.widget.TextView
-import android.widget.Toast
-
+import android.widget.*
 import com.bumptech.glide.Glide
-
-import java.util.Timer
-import java.util.TimerTask
+import java.util.*
 
 /**
  * Created by XiaoJianjun on 2017/4/28.
@@ -85,6 +77,7 @@ class NiceVideoPlayerController(private val mContext: Context) : FrameLayout(mCo
         mReplay!!.setOnClickListener(this)
         mShare!!.setOnClickListener(this)
         mSeek!!.setOnSeekBarChangeListener(this)
+
         this.setOnClickListener(this)
     }
 

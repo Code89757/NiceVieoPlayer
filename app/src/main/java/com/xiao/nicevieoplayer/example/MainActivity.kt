@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         mNiceVideoPlayer = findViewById(R.id.nice_video_player) as NiceVideoPlayer
         mNiceVideoPlayer!!.setUp("http://tanzi27niu.cdsb.mobi/wps/wp-content/uploads/2017/05/2017-05-17_17-33-30.mp4", null)
+
         val controller = NiceVideoPlayerController(this)
         controller.setTitle("办公室小野开番外了，居然在办公室开澡堂！老板还点赞？")
         controller.setImage("http://tanzi27niu.cdsb.mobi/wps/wp-content/uploads/2017/05/2017-05-17_17-30-43.jpg")
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (NiceVideoPlayerManager.instance().onBackPressd()) {
+        if (NiceVideoPlayerManager.instance().onBackPressed()) {
             return
         }
         super.onBackPressed()

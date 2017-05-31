@@ -1,17 +1,14 @@
 package com.xiao.nicevideoplayer
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.support.v7.app.ActionBar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.view.ContextThemeWrapper
-import android.util.DisplayMetrics
 import android.util.TypedValue
 import android.view.WindowManager
-
-import java.util.Formatter
-import java.util.Locale
+import java.util.*
 
 /**
  * Created by XiaoJianjun on 2017/5/8.
@@ -52,6 +49,7 @@ object NiceUtil {
         return null
     }
 
+    @SuppressLint("RestrictedApi")
     fun showActionBar(context: Context) {
         val ab = getAppCompActivity(context)!!.supportActionBar
         if (ab != null) {
@@ -63,6 +61,7 @@ object NiceUtil {
                 .clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
+    @SuppressLint("RestrictedApi")
     fun hideActionBar(context: Context) {
         val ab = getAppCompActivity(context)!!.supportActionBar
         if (ab != null) {
@@ -104,7 +103,7 @@ object NiceUtil {
      * 将毫秒数格式化为"##:##"的时间
 
      * @param milliseconds 毫秒数
-     * *
+     *
      * @return ##:##
      */
     fun formatTime(milliseconds: Int): String {

@@ -6,12 +6,21 @@ package com.xiao.nicevideoplayer
  */
 class NiceVideoPlayerManager private constructor() {
 
+    /**
+     * 视频播放器
+     */
     private var mVideoPlayer: NiceVideoPlayer? = null
 
-    fun setCurrentNiceVideoPlayer(videoPlayer: NiceVideoPlayer) {
+    /**
+     * 设置当前播放器
+     */
+    fun setCurrentNiceVideoPlayer(videoPlayer: NiceVideoPlayer?) {
         mVideoPlayer = videoPlayer
     }
 
+    /**
+     * 释放播放器
+     */
     fun releaseNiceVideoPlayer() {
         if (mVideoPlayer != null) {
             mVideoPlayer!!.release()
@@ -19,7 +28,10 @@ class NiceVideoPlayerManager private constructor() {
         }
     }
 
-    fun onBackPressd(): Boolean {
+    /**
+     * 点击返回时触发
+     */
+    fun onBackPressed(): Boolean {
         if (mVideoPlayer != null) {
             if (mVideoPlayer!!.isFullScreen) {
                 return mVideoPlayer!!.exitFullScreen()
@@ -33,6 +45,9 @@ class NiceVideoPlayerManager private constructor() {
         return false
     }
 
+    /**
+     * 单例
+     */
     companion object {
 
         private var sInstance: NiceVideoPlayerManager? = null
@@ -41,7 +56,7 @@ class NiceVideoPlayerManager private constructor() {
             if (sInstance == null) {
                 sInstance = NiceVideoPlayerManager()
             }
-            return sInstance
+            return sInstance!!
         }
     }
 }

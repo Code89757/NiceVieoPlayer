@@ -5,14 +5,12 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
-
 import com.xiao.nicevideoplayer.NiceVideoPlayer
 import com.xiao.nicevideoplayer.NiceVideoPlayerManager
 import com.xiao.nicevieoplayer.R
 import com.xiao.nicevieoplayer.example.adapter.VideoAdapter
 import com.xiao.nicevieoplayer.example.bean.Video
-
-import java.util.ArrayList
+import java.util.*
 
 class RecyclerViewActivity : AppCompatActivity() {
 
@@ -84,7 +82,7 @@ class RecyclerViewActivity : AppCompatActivity() {
         }
 
     override fun onBackPressed() {
-        if (NiceVideoPlayerManager.instance().onBackPressd()) {
+        if (NiceVideoPlayerManager.instance().onBackPressed()) {
             return
         }
         super.onBackPressed()
