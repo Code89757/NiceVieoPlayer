@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import com.bumptech.glide.Glide
+import com.xiao.nicevideoplayer.utils.NiceUtil
 import java.util.*
 
 /**

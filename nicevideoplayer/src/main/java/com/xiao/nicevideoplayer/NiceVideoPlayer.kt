@@ -13,6 +13,8 @@ import android.view.Surface
 import android.view.TextureView
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.xiao.nicevideoplayer.utils.LogUtil
+import com.xiao.nicevideoplayer.utils.NiceUtil
 import java.io.IOException
 
 /**
@@ -244,7 +246,7 @@ class NiceVideoPlayer @JvmOverloads constructor(
         false
     }
 
-    private val mOnInfoListener = MediaPlayer.OnInfoListener { mp, what, extra ->
+    private val mOnInfoListener = MediaPlayer.OnInfoListener { mediaPlayer, what, extra ->
         if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
             // 播放器渲染第一帧
             mCurrentState = STATE_PLAYING

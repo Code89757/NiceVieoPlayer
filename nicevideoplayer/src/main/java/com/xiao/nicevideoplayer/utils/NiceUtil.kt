@@ -1,13 +1,5 @@
-package com.xiao.nicevideoplayer
+package com.xiao.nicevideoplayer.utils
 
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
-import android.content.ContextWrapper
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.view.ContextThemeWrapper
-import android.util.TypedValue
-import android.view.WindowManager
 import java.util.*
 
 /**
@@ -22,12 +14,12 @@ object NiceUtil {
      * *
      * @return object of Activity or null if it is not Activity
      */
-    fun scanForActivity(context: Context?): Activity? {
+    fun scanForActivity(context: android.content.Context?): android.app.Activity? {
         if (context == null) return null
-        if (context is Activity) {
+        if (context is android.app.Activity) {
             return context
-        } else if (context is ContextWrapper) {
-            return scanForActivity(context.baseContext)
+        } else if (context is android.content.ContextWrapper) {
+            return com.xiao.nicevideoplayer.utils.NiceUtil.scanForActivity(context.baseContext)
         }
         return null
     }
@@ -39,39 +31,39 @@ object NiceUtil {
      * *
      * @return AppCompatActivity if it's not null
      */
-    fun getAppCompActivity(context: Context?): AppCompatActivity? {
+    fun getAppCompActivity(context: android.content.Context?): android.support.v7.app.AppCompatActivity? {
         if (context == null) return null
-        if (context is AppCompatActivity) {
+        if (context is android.support.v7.app.AppCompatActivity) {
             return context
-        } else if (context is ContextThemeWrapper) {
-            return getAppCompActivity(context.baseContext)
+        } else if (context is android.support.v7.view.ContextThemeWrapper) {
+            return com.xiao.nicevideoplayer.utils.NiceUtil.getAppCompActivity(context.baseContext)
         }
         return null
     }
 
-    @SuppressLint("RestrictedApi")
-    fun showActionBar(context: Context) {
-        val ab = getAppCompActivity(context)!!.supportActionBar
+    @android.annotation.SuppressLint("RestrictedApi")
+    fun showActionBar(context: android.content.Context) {
+        val ab = com.xiao.nicevideoplayer.utils.NiceUtil.getAppCompActivity(context)!!.supportActionBar
         if (ab != null) {
             ab.setShowHideAnimationEnabled(false)
             ab.show()
         }
-        scanForActivity(context)!!
+        com.xiao.nicevideoplayer.utils.NiceUtil.scanForActivity(context)!!
                 .window
-                .clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                .clearFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
-    @SuppressLint("RestrictedApi")
-    fun hideActionBar(context: Context) {
-        val ab = getAppCompActivity(context)!!.supportActionBar
+    @android.annotation.SuppressLint("RestrictedApi")
+    fun hideActionBar(context: android.content.Context) {
+        val ab = com.xiao.nicevideoplayer.utils.NiceUtil.getAppCompActivity(context)!!.supportActionBar
         if (ab != null) {
             ab.setShowHideAnimationEnabled(false)
             ab.hide()
         }
-        scanForActivity(context)!!
+        com.xiao.nicevideoplayer.utils.NiceUtil.scanForActivity(context)!!
                 .window
-                .setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                        WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                .setFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                        android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN)
     }
 
     /**
@@ -81,7 +73,7 @@ object NiceUtil {
      * *
      * @return width of the screen.
      */
-    fun getScreenWidth(context: Context): Int {
+    fun getScreenWidth(context: android.content.Context): Int {
         return context.resources.displayMetrics.widthPixels
     }
 
@@ -94,8 +86,8 @@ object NiceUtil {
      * *
      * @return px value
      */
-    fun dp2px(context: Context, dpVal: Float): Int {
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dpVal,
+    fun dp2px(context: android.content.Context, dpVal: Float): Int {
+        return android.util.TypedValue.applyDimension(android.util.TypedValue.COMPLEX_UNIT_DIP, dpVal,
                 context.resources.displayMetrics).toInt()
     }
 
@@ -115,7 +107,7 @@ object NiceUtil {
         val minutes = totalSeconds / 60 % 60
         val hours = totalSeconds / 3600
         val stringBuilder = StringBuilder()
-        val mFormatter = Formatter(stringBuilder, Locale.getDefault())
+        val mFormatter = java.util.Formatter(stringBuilder, Locale.getDefault())
         if (hours > 0) {
             return mFormatter.format("%d:%02d:%02d", hours, minutes, seconds).toString()
         } else {
