@@ -24,10 +24,7 @@ import java.io.IOException
 class NiceVideoPlayer @JvmOverloads constructor(
         private val mContext: Context,
         attrs: AttributeSet? = null
-)
-    : FrameLayout(mContext, attrs),
-        NiceVideoPlayerControl,
-        TextureView.SurfaceTextureListener {
+) : FrameLayout(mContext, attrs), NiceVideoPlayerControl, TextureView.SurfaceTextureListener {
 
     private var mCurrentState = STATE_IDLE
     private var mPlayerState = PLAYER_NORMAL

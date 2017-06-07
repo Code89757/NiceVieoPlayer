@@ -8,11 +8,13 @@ import com.xiao.nicevideoplayer.model.NiceVideoStates
  * Created by wenyugang on 2017/5/31.
  */
 interface INicePlayer {
-    val videoStates: NiceVideoStates
+    val mVideoStates: NiceVideoStates
 
+    fun setup(uri: Uri)
     fun seek(progress: Int)
     fun play()
     fun stop()
     fun pause()
-    fun setup(uri: Uri)
+    fun destroy()
+
 }

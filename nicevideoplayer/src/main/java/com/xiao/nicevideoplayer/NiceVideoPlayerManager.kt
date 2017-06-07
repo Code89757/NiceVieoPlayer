@@ -1,20 +1,22 @@
 package com.xiao.nicevideoplayer
 
+import com.xiao.nicevideoplayer.core.INicePlayer
+
 /**
- * Created by XiaoJianjun on 2017/5/5.
- * 视频播放器管理器.
+ * 视频播放器管理器,保存唯一一个正在播放的播放器
+ * Created by wenyugang on 2017/5/5.
  */
 class NiceVideoPlayerManager private constructor() {
 
     /**
      * 视频播放器
      */
-    private var mVideoPlayer: NiceVideoPlayer? = null
+    private var mVideoPlayer: INicePlayer? = null
 
     /**
      * 设置当前播放器
      */
-    fun setCurrentNiceVideoPlayer(videoPlayer: NiceVideoPlayer?) {
+    fun setCurrentNiceVideoPlayer(videoPlayer: INicePlayer?) {
         mVideoPlayer = videoPlayer
     }
 
@@ -23,7 +25,7 @@ class NiceVideoPlayerManager private constructor() {
      */
     fun releaseNiceVideoPlayer() {
         if (mVideoPlayer != null) {
-            mVideoPlayer!!.release()
+            mVideoPlayer!!.destroy()
             mVideoPlayer = null
         }
     }
@@ -33,14 +35,8 @@ class NiceVideoPlayerManager private constructor() {
      */
     fun onBackPressed(): Boolean {
         if (mVideoPlayer != null) {
-            if (mVideoPlayer!!.isFullScreen) {
-                return mVideoPlayer!!.exitFullScreen()
-            } else if (mVideoPlayer!!.isTinyWindow) {
-                return mVideoPlayer!!.exitTinyWindow()
-            } else {
-                mVideoPlayer!!.release()
-                return false
-            }
+            mVideoPlayer!!.destroy()
+            return false
         }
         return false
     }
